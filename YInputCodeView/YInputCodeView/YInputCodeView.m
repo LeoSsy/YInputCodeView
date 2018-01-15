@@ -154,14 +154,6 @@ static const NSInteger textFW = 40; //默认宽度
 }
 
 #pragma mark UITextFieldDelegate
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    if (textField.text.length > 1) {
-        return false;
-    }
-    return YES;
-}
-
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (!textField.hasText) {
         //获取当前文本框
@@ -186,6 +178,8 @@ static const NSInteger textFW = 40; //默认宽度
             }
         }
     }else {
+        //根据位置去确定是否可以输入
+        if (range.location > 0 ) {return false;}
         return true;
     }
     return false;
